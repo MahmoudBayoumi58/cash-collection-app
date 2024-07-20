@@ -1,0 +1,555 @@
+{
+	"info": {
+		"_postman_id": "2ec6eaff-69f5-415c-a339-249bfe980b14",
+		"name": "CashCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20500858"
+	},
+	"item": [
+		{
+			"name": "user_management",
+			"item": [
+				{
+					"name": "registration",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"first_name\": \"Mahmoud\",\r\n    \"last_name\": \"Bayoumi\",\r\n    \"email\": \"mahmoudtotti120@gmail.com\",\r\n    \"password\": \"anatotti\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/user/v1/register/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"user",
+								"v1",
+								"register",
+								""
+							]
+						},
+						"description": "# User Registration\n\nThis endpoint allows users to register with the system by providing their first name, last name, email, and password.\n\n## Request Body\n\n- `first_name` (string, required): The first name of the user.\n    \n- `last_name` (string, required): The last name of the user.\n    \n- `email` (string, required): The email address of the user.\n    \n- `password` (string, required): The password for the user account.\n    \n\n## Response\n\nThe response of this request is a JSON object with the following properties:\n\n- `status` (string): Indicates the status of the registration process.\n    \n- `message` (string): Provides a message regarding the registration status.\n    \n\n``` json\n{\n    \"status\": \"success\",\n    \"message\": \"User registered successfully\"\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@admin.com\",\r\n    \"password\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/user/v1/login/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"user",
+								"v1",
+								"login",
+								""
+							]
+						},
+						"description": "### Login User\n\nThis endpoint is used to log in a user using jwt authentication.\n\n#### Request\n\n- Method: POST\n    \n- URL: `http://127.0.0.1:8000/user/v1/login/`\n    \n- Body:\n    \n    - email (text, required): The email of the user.\n        \n    - password (text, required): The password of the user.\n        \n\n#### Response\n\nThe response is returned in JSON format with the following schema:\n\n``` json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"refresh\": {\n            \"type\": \"string\"\n        },\n        \"access\": {\n            \"type\": \"string\"\n        }\n    }\n}\n\n ```\n\n- Status: 200\n    \n- Content-Type: application/json"
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIxMzA2MTA4LCJpYXQiOjE3MjEzMDI1MDgsImp0aSI6IjBkOWY1OWNjZmVhMjQxZGViNjA1Y2QzMzc4OWU5YWIzIiwidXNlcl9pZCI6Mn0.rLINnaMByd_qj0UZRxTP6xD64mI-4F9d4kOqzZmO3MU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"refresh_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcyMTM4ODkwOCwiaWF0IjoxNzIxMzAyNTA4LCJqdGkiOiJjM2NmODE5YmY3MjY0NGNmOTA1OGEwZTY3YTYwNzdiYSIsInVzZXJfaWQiOjJ9.pBtOm5MtfgbBVrW4Y5Ln0SOki4T546Y2Fm2O0PAaPZM\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/user/v1/logout/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"user",
+								"v1",
+								"logout",
+								""
+							]
+						},
+						"description": "This endpoint is used to log out a user by revoking the refresh token.\n\n### Request Body\n\n- refresh_token (string, required): The refresh token of the user to be revoked.\n    \n\n### Response\n\nThe response of this request is a JSON schema representing the structure of the response data. It will include the properties and their data types that can be expected in the response."
+					},
+					"response": []
+				},
+				{
+					"name": "add-customer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIxNDExNjk1LCJpYXQiOjE3MjE0MDgwOTUsImp0aSI6ImU0NjkzMmVmNGRiMTQwMDI5ZDdhMDQ5Mzg2MjYyN2QwIiwidXNlcl9pZCI6Mn0.KjoDpKyR2AS7ZjSjHj9qWhJEL49pTrVjjK9joarjZso",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Eman Mohammed\",\r\n    \"address\": \"Cairo,Egypt\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/user/v1/customer/add/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"user",
+								"v1",
+								"customer",
+								"add",
+								""
+							]
+						},
+						"description": "The `POST /user/v1/customer/add/` endpoint is used to add a new customer. It expects a JSON payload in the request body with the customer's name and address.\n\nonly manager can use this endpoint.\n\n### Request Body\n\n- `name` (string, required): The name of the customer.\n    \n- `address` (string, required): The address of the customer.\n    \n\n### Response\n\nThe response will be a JSON object with the following properties:\n\n- `id` (number): The unique identifier of the newly created customer.\n    \n- `created_at` (string): The timestamp when the customer was created.\n    \n- `updated_at` (string): The timestamp when the customer was last updated.\n    \n- `name` (string): The name of the customer.\n    \n- `address` (string): The address of the customer.\n    \n- `is_deleted` (boolean): Indicates whether the customer is marked as deleted.\n    \n\n#### JSON Schema\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"id\": {\n      \"type\": \"number\"\n    },\n    \"created_at\": {\n      \"type\": \"string\"\n    },\n    \"updated_at\": {\n      \"type\": \"string\"\n    },\n    \"name\": {\n      \"type\": \"string\"\n    },\n    \"address\": {\n      \"type\": \"string\"\n    },\n    \"is_deleted\": {\n      \"type\": \"boolean\"\n    }\n  }\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "users-status",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIxNDgzNTc4LCJpYXQiOjE3MjE0Nzk5NzgsImp0aSI6ImFkY2FkYzAyZTc4YTQyZDRhMDU3ZTE5YWMyNWFhOTg0IiwidXNlcl9pZCI6MX0.4mqNuAwuWKUkJLNvRtn6YCqctvWUXo-burYji3zQ_xY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/user/v1/status/list",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"user",
+								"v1",
+								"status",
+								"list"
+							]
+						},
+						"description": "This endpoint makes an HTTP GET request to retrieve up-to-date list of frozen/unfrozen users. The request does not include a request body.\n\nonly manager can use this endpoint.\n\n### Response\n\nThe response will have a status code of 200 and a content type of application/json. The body of the response will contain a JSON object with the following structure:\n\n``` json\n{\n    \"count\": 0,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"first_name\": \"\",\n            \"last_name\": \"\",\n            \"email\": \"\",\n            \"is_cash_collector\": true,\n            \"is_manager\": true,\n            \"is_frozen\": true\n        }\n    ]\n}\n\n ```\n\nThe `count` field indicates the number of results, while the `results` array contains the list of user statuses. Each user status object includes fields for `first_name`, `last_name`, `email`, `is_cash_collector`, `is_manager`, and `is_frozen`."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cash_management",
+			"item": [
+				{
+					"name": "create-cash-create-task",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIxNDExNjk1LCJpYXQiOjE3MjE0MDgwOTUsImp0aSI6ImU0NjkzMmVmNGRiMTQwMDI5ZDdhMDQ5Mzg2MjYyN2QwIiwidXNlcl9pZCI6Mn0.KjoDpKyR2AS7ZjSjHj9qWhJEL49pTrVjjK9joarjZso",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer\": 4,\r\n    \"cash_collector\": 1,\r\n    \"amount_due\": 5000,\r\n    \"amount_due_at\": \"2024-07-19 12:03:14.771036\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/cash/v1/task/add/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"cash",
+								"v1",
+								"task",
+								"add",
+								""
+							]
+						},
+						"description": "### Add Cash Collection Task\n\nThis endpoint allows you to add a new cash collection task.\n\nonly manager can use this endpoint.\n\n#### Request Body\n\n- `customer`: The ID of the customer for whom the cash collection task is being added.\n    \n- `cash_collector`: The ID of the cash collector assigned to the task.\n    \n- `amount_due`: The amount due for collection.\n    \n- `amount_due_at`: The due date for the amount to be collected.\n    \n\n#### Response\n\nThe response will be in JSON format and will include a JSON schema for the response.\n\n``` json\n{\n    \"customer\": 2,\n    \"cash_collector\": 2,\n    \"amount_due\": \"3000.00\",\n    \"amount_due_at\": \"2024-07-19T12:03:14.771036Z\",\n    \"status\": \"pending\",\n    \"collected_at\": null,\n    \"delivered_at\": null\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "create-cash-completed-tasks",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIxNDgzNTc4LCJpYXQiOjE3MjE0Nzk5NzgsImp0aSI6ImFkY2FkYzAyZTc4YTQyZDRhMDU3ZTE5YWMyNWFhOTg0IiwidXNlcl9pZCI6MX0.4mqNuAwuWKUkJLNvRtn6YCqctvWUXo-burYji3zQ_xY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/cash/v1/cash_collector/tasks",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"cash",
+								"v1",
+								"cash_collector",
+								"tasks"
+							]
+						},
+						"description": "The endpoint retrieves a list of cash collector tasks that has been done be him.\n\nonly cash-collector can use this endpoint.\n\nThe response is a JSON object with the following schema:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"count\": {\n      \"type\": \"integer\"\n    },\n    \"next\": {\n      \"type\": [\"string\", \"null\"]\n    },\n    \"previous\": {\n      \"type\": [\"string\", \"null\"]\n    },\n    \"results\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"id\": {\n            \"type\": \"integer\"\n          },\n          \"customer\": {\n            \"type\": \"object\",\n            \"properties\": {\n              \"id\": {\n                \"type\": \"integer\"\n              },\n              \"created_at\": {\n                \"type\": \"string\"\n              },\n              \"updated_at\": {\n                \"type\": \"string\"\n              },\n              \"name\": {\n                \"type\": \"string\"\n              },\n              \"address\": {\n                \"type\": \"string\"\n              },\n              \"is_deleted\": {\n                \"type\": \"boolean\"\n              }\n            }\n          },\n          \"cash_collector\": {\n            \"type\": \"object\",\n            \"properties\": {\n              \"first_name\": {\n                \"type\": \"string\"\n              },\n              \"last_name\": {\n                \"type\": \"string\"\n              },\n              \"email\": {\n                \"type\": \"string\"\n              },\n              \"is_cash_collector\": {\n                \"type\": \"boolean\"\n              },\n              \"is_manager\": {\n                \"type\": \"boolean\"\n              },\n              \"is_frozen\": {\n                \"type\": \"boolean\"\n              }\n            }\n          },\n          \"created_at\": {\n            \"type\": \"string\"\n          },\n          \"updated_at\": {\n            \"type\": \"string\"\n          },\n          \"amount_due_currency\": {\n            \"type\": \"string\"\n          },\n          \"amount_due\": {\n            \"type\": \"string\"\n          },\n          \"amount_due_at\": {\n            \"type\": \"string\"\n          },\n          \"status\": {\n            \"type\": \"string\"\n          },\n          \"collected_at\": {\n            \"type\": \"string\"\n          },\n          \"delivered_at\": {\n            \"type\": [\"string\", \"null\"]\n          },\n          \"is_deleted\": {\n            \"type\": \"boolean\"\n          },\n          \"added_by\": {\n            \"type\": \"integer\"\n          }\n        }\n      }\n    }\n  }\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "cash-collector-next-task",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIxNDg1NTY2LCJpYXQiOjE3MjE0ODE5NjYsImp0aSI6ImRlNWM0ZjAwZGQwZDRkYWNhOWIxZmJiZDQxOTBhMWJkIiwidXNlcl9pZCI6MX0.OAIUHQWvx_bpxEMSmzUTbFfAwbyjcbgZtX_keJZBbd4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/cash/v1/cash_collector/task/next",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"cash",
+								"v1",
+								"cash_collector",
+								"task",
+								"next"
+							]
+						},
+						"description": "### GET /cash/v1/cash_collector/task/next\n\nThis endpoint retrieves the next cash collection task for the cash collector.\n\nonly cash-collector can use this endpoint.\n\n#### Request\n\nThis endpoint does not require any request parameters.\n\n#### Response\n\nThe response will be in JSON format and will have the following schema:\n\n``` json\n{\n    \"id\": \"number\",\n    \"customer\": {\n        \"id\": \"number\",\n        \"created_at\": \"string\",\n        \"updated_at\": \"string\",\n        \"name\": \"string\",\n        \"address\": \"string\",\n        \"is_deleted\": \"boolean\"\n    },\n    \"cash_collector\": {\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"email\": \"string\",\n        \"is_cash_collector\": \"boolean\",\n        \"is_manager\": \"boolean\",\n        \"is_frozen\": \"boolean\"\n    },\n    \"amount_due\": \"string\",\n    \"amount_due_at\": \"string\",\n    \"status\": \"string\",\n    \"collected_at\": \"string or null\",\n    \"delivered_at\": \"string or null\"\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "cash-collector-status",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIxNDgzNTc4LCJpYXQiOjE3MjE0Nzk5NzgsImp0aSI6ImFkY2FkYzAyZTc4YTQyZDRhMDU3ZTE5YWMyNWFhOTg0IiwidXNlcl9pZCI6MX0.4mqNuAwuWKUkJLNvRtn6YCqctvWUXo-burYji3zQ_xY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/cash/v1/cash_collector/status/1/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"cash",
+								"v1",
+								"cash_collector",
+								"status",
+								"1",
+								""
+							]
+						},
+						"description": "### Retrieve Cash Collector Status\n\nThis endpoint retrieves the status of a cash collector with the specified ID.\n\nboth cash-collector and manager can use this endpoint.\n\n#### Request\n\n- Method: GET\n    \n- URL: `http://127.0.0.1:8000/cash/v1/cash_collector/status/1/`\n    \n\n#### Response\n\nThe response will be in JSON format and will have the following schema:\n\n``` json\n{\n    \"status\": \"string\"\n}\n\n ```\n\n- `status`: (string) The status of the cash collector."
+					},
+					"response": []
+				},
+				{
+					"name": "cash-collector-collect-cash",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIxNDEwMTA0LCJpYXQiOjE3MjE0MDY1MDQsImp0aSI6ImRlMGU1MGIwYjc5MzQ2YzI4MTU3ZWQ0ZTM5Zjc2MmMwIiwidXNlcl9pZCI6MX0.FMEPD7Wnjy6uikkVOw5ZhSrWmL15cODphx0eSvNb8wA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/cash/v1/cash_collector/task/collect/4/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"cash",
+								"v1",
+								"cash_collector",
+								"task",
+								"collect",
+								"4",
+								""
+							]
+						},
+						"description": "\n### Update Cash Collection Task\nThis endpoint allows the user to update the details of a cash collection task.\n\n#### Request Body\n- No request body parameters provided.\n\n#### Response Body\nThe response is in JSON format and represents the updated details of the cash collection task. Below is a JSON schema representing the response body:\n\n```json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"id\": {\"type\": \"integer\"},\n        \"customer\": {\n            \"type\": \"object\",\n            \"properties\": {\n                \"id\": {\"type\": \"integer\"},\n                \"created_at\": {\"type\": \"string\"},\n                \"updated_at\": {\"type\": \"string\"},\n                \"name\": {\"type\": \"string\"},\n                \"address\": {\"type\": \"string\"},\n                \"is_deleted\": {\"type\": \"boolean\"}\n            }\n        },\n        \"cash_collector\": {\n            \"type\": \"object\",\n            \"properties\": {\n                \"first_name\": {\"type\": \"string\"},\n                \"last_name\": {\"type\": \"string\"},\n                \"email\": {\"type\": \"string\"},\n                \"is_cash_collector\": {\"type\": \"boolean\"},\n                \"is_manager\": {\"type\": \"boolean\"},\n                \"is_frozen\": {\"type\": \"boolean\"}\n            }\n        },\n        \"created_at\": {\"type\": \"string\"},\n        \"updated_at\": {\"type\": \"string\"},\n        \"amount_due_currency\": {\"type\": \"string\"},\n        \"amount_due\": {\"type\": \"string\"},\n        \"amount_due_at\": {\"type\": \"string\"},\n        \"status\": {\"type\": \"string\"},\n        \"collected_at\": {\"type\": \"string\"},\n        \"delivered_at\": {\"type\": [\"string\", \"null\"]},\n        \"is_deleted\": {\"type\": \"boolean\"},\n        \"added_by\": {\"type\": \"integer\"}\n    }\n}\n```\n"
+					},
+					"response": []
+				},
+				{
+					"name": "cash-collector-deliver-cash",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIxNDg1NTY2LCJpYXQiOjE3MjE0ODE5NjYsImp0aSI6ImRlNWM0ZjAwZGQwZDRkYWNhOWIxZmJiZDQxOTBhMWJkIiwidXNlcl9pZCI6MX0.OAIUHQWvx_bpxEMSmzUTbFfAwbyjcbgZtX_keJZBbd4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cash_collector\": 1,\r\n    \"manager\": 2,\r\n    \"tasks\": [1,2,3]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/cash/v1/cash_collector/task/pay/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"cash",
+								"v1",
+								"cash_collector",
+								"task",
+								"pay",
+								""
+							]
+						},
+						"description": "### Cash Collector Task Payment\n\nThis endpoint allows the cash collector to make a payment for the assigned tasks.\n\n#### Request Body\n\n- `cash_collector` (number): The ID of the cash collector making the payment.\n    \n- `manager` (number): The ID of the manager overseeing the payment.\n    \n- `tasks` (array): An array of task IDs for which the payment is being made.\n    \n\n#### Response (JSON Schema)\n\n``` json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"id\": {\n            \"type\": \"number\"\n        },\n        \"delivered_at\": {\n            \"type\": \"string\"\n        },\n        \"total_amount_currency\": {\n            \"type\": \"string\"\n        },\n        \"total_amount\": {\n            \"type\": \"number\"\n        },\n        \"cash_collector\": {\n            \"type\": \"number\"\n        },\n        \"manager\": {\n            \"type\": \"number\"\n        },\n        \"tasks\": {\n            \"type\": \"array\",\n            \"items\": {\n                \"type\": \"number\"\n            }\n        }\n    }\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "collection-records",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIxNDkzMTczLCJpYXQiOjE3MjE0ODk1NzMsImp0aSI6IjkyOThjZjFmYzg1ZjQ5ZTg5YTdiNzJiMjY1NmJkYmIxIiwidXNlcl9pZCI6Mn0.zmNyC5zuJ9iC7v2skQq5GEbbwuGYizSIesf3gms7miE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"date_from\": \"2024-07-20 15:24:48.253872\",\r\n    \"date_to\": \"2024-07-22 15:24:48.253872\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/cash/v1/cash_collector/records/2/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"cash",
+								"v1",
+								"cash_collector",
+								"records",
+								"2",
+								""
+							]
+						},
+						"description": "### POST /cash/v1/cash_collector/records/1/\n\nThis endpoint is used to retrieve the status of cash-collector at different time points.\n\nit took cash-collector-id in url to retrieve all collection records for this cash-collector within specific date-time.\n\nonly manager can use this endpoint.\n\n#### Request Body\n\n- `date_from` (string, optional): The start date for the record.\n    \n- `date_to` (string, optional): The end date for the record.\n    \n\n#### Response\n\nUpon a successful execution, the server responds with a status code of 200 and a JSON object containing the following fields:\n\n- `count`: The total count of records.\n    \n- `next`: Link to the next page of records.\n    \n- `previous`: Link to the previous page of records.\n    \n- `results`: An array of objects containing the cash collector ID, collected amount, creation timestamp, and status."
+					},
+					"response": []
+				},
+				{
+					"name": "cash-collector-tasks-by-status",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIxNDkzMTczLCJpYXQiOjE3MjE0ODk1NzMsImp0aSI6IjkyOThjZjFmYzg1ZjQ5ZTg5YTdiNzJiMjY1NmJkYmIxIiwidXNlcl9pZCI6Mn0.zmNyC5zuJ9iC7v2skQq5GEbbwuGYizSIesf3gms7miE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cash_collector\": 1,\r\n    \"status\": \"pending\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/cash/v1/tasks/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"cash",
+								"v1",
+								"tasks",
+								""
+							]
+						},
+						"description": "### Add Cash Collection Task\n\nThis endpoint allows the manager to retreive cash-collector tasks by status filter\n\n#### Request Body\n\n- `cash_collector` (integer): The ID of the cash collector assigned to the task.\n    \n- `status` (string): The status of the cash collection tasks.\n    \n\n#### Response\n\nUpon successful execution, the server returns a JSON object with the following fields:\n\n- `count` (integer): The total count of results.\n    \n- `next` (string): The URL for the next page of results.\n    \n- `previous` (string): The URL for the previous page of results.\n    \n- `results` (array): An array of objects containing the details of the newly added cash collection task, including the ID, customer details, cash collector details, created and updated timestamps, amount due, status, and more."
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
