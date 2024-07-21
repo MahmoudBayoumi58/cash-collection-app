@@ -55,7 +55,7 @@ This project is a Django-based Cash Collection application with a RESTful backen
 ### API Endpoints
 
 - **Registration**: `/user/v1/register/` - By default register user as cash-collector account.
-- **Login**: `/user/v1/login/` - Auth user using JWT.
+- **Login**: `/user/v1/login/` - Log in a user to get access, refresh tokens.
 - **Logout**: `/user/v1/logout/` - Used to log out a user by revoking the refresh token.
 - **Add Customer**: `/user/v1/customer/add/` - Used to add a new customer.
 - **Users Status**: `/user/v1/status/list` - Get up-to-date list of frozen/unfrozen users.
