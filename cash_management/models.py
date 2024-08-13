@@ -46,6 +46,8 @@ class CollectionRecord(TimeStampedModel):
         record.save()
         return record
 
+    class Meta:
+        ordering = ['-created_at']
 
 
 class Delivery(models.Model):

@@ -27,7 +27,10 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
-    def check_frozen_status(self):
+    class Meta:
+        ordering = ('-id',)
+
+    def set_frozen_status(self) -> None:
         threshold_days = int(settings.THRESHOLD_DAYS)
         threshold_amount = int(settings.THRESHOLD_AMOUNT)
         two_days_ago = timezone.now() - timedelta(days=threshold_days)

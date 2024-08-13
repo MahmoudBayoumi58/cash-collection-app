@@ -67,7 +67,7 @@ class CashCollectorNextTaskRetrieveView(RetrieveAPIView):
 
     def get(self, request, *args, **kwargs):
         user = request.user
-        user.check_frozen_status()
+        user.set_frozen_status()
         next_task = self.get_queryset().filter(status='pending').first()
         cash_collector_status = 'Frozen' if user.is_frozen else 'Not Frozen'
         if user.is_frozen:
@@ -129,7 +129,7 @@ class CashCollectorDeliverCashView(APIView):
                 delivery.tasks.add(*collected_tasks)
                 delivery.save()
                 # unfrozen cash-collector status
-                delivery.cash_collector.check_frozen_status()
+                delivery.cash_collector.set_frozen_status()
                 delivery_serializer = DeliverySerializer(delivery)
                 return Response(delivery_serializer.data, status=status.HTTP_200_OK)
 
